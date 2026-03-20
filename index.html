@@ -115,7 +115,7 @@
             width: var(--grid-size);
             aspect-ratio: 1 / 1;
             gap: 0.8%;
-            margin-top: 4vh; /* Adjusted for centered timer */
+            margin-top: 5vh; /* Adjusted for centered timer */
         }
 
         .tile {
@@ -158,13 +158,13 @@
         }
 
         .star-display {
-            margin-top: 50%; 
+            margin-top: 48%; 
             width: 65%;
         }
 
 
         .restart-btn {
-            margin-top: 20%;
+            margin-top: 15%;
             padding: 1.5vh 4vh;
             background: var(--gold);
             border: none;
@@ -181,6 +181,62 @@
             color: white; cursor: pointer; width: 2.5vh; height: 2.5vh;
             margin-left: 0.8vh; display: flex; align-items: center; justify-content: center;
         }
+           .fail-text {
+            color: white;
+            font-size: 3vh;
+            font-weight: bold;
+            margin-top: 10%;
+            text-align: center;
+        }
+        #fail-panel {
+           position: absolute;
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); /* Dark overlay */
+            z-index: 100;
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+             border-radius: 3.2vh;
+        }
+
+/* The actual plain box inside the fail panel */
+.fail-box {
+    background: #2c3e50;
+    border: 0.5vh solid var(--gold);
+    border-radius: 4vh;
+    padding: 5vh 2vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.fail-text {
+    color: white;
+    font-size: 4vh;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 90%;
+    margin-top: 5%;
+}
+
+.panel-btn {
+    padding: 2vh;
+    border: none;
+    border-radius: 2vh;
+    font-weight: bold;
+    font-size: 2vh;
+    cursor: pointer;
+    text-transform: uppercase;
+}
     </style>
 </head>
 <body>
@@ -192,7 +248,7 @@
         <div class="ui-bar">
             <div class="icon-circle">🏠</div>
             <span id="level-display">Lv. 1</span>
-            <button class="add-btn" onclick="increaseLevel()">+</button>
+        
         </div>
         <div class="ui-bar" style="padding: 0.5vh;">
             <div class="icon-circle" style="margin:0;">⚙️</div>
@@ -203,17 +259,28 @@
 
     <div class="puzzle-board" id="board"></div>
 
-    <div id="win-panel">
+    <div id="win-panel" class ="win-panel1">
         <div class="panel-content">
             <img id="star-img" src="stars/0 Stars.webp" class="star-display">
             <button class="restart-btn" onclick="location.reload()">PLAY AGAIN</button>
         </div>
     </div>
+    <div id="fail-panel">
+    <div class="fail-box">
+        <div class="fail-text">OUT OF TIME!</div>
+        <div class="btn-group">
+            <button class="panel-btn ad-btn" onclick="watchAd()">📺 WATCH AD (+30s)</button>
+            <button class="panel-btn" onclick="location.reload()" style="background: #e74c3c; color: white;">🔄 RETRY</button>
+        </div>
+    </div>
+  </div>
+   </div>
 </div>
 
 <script>
     const board = document.getElementById('board');
     const winPanel = document.getElementById('win-panel');
+    const failPanel = document.getElementById('fail-panel');
     const starImg = document.getElementById('star-img');
     const timerDisplay = document.getElementById("timer");
     
@@ -247,10 +314,22 @@
             updateTimerDisplay();
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                gameActive = false;
-                alert("Game Over!");
+                showFailPanel();
             }
         }, 1000);
+    }
+    function showFailPanel() {
+         gameActive = false;
+         failPanel.style.display = 'flex';
+    }
+
+    function watchAd() {
+        // Here you would normally trigger your Ad SDK
+        alert("Simulating Ad... Rewards: +10 Seconds!");
+        failPanel.style.display = 'none';
+        timeLeft = 10; // Give 30 more seconds
+        gameActive = true;
+        startTimer();
     }
 
     function render() {
@@ -309,8 +388,8 @@
         const timeSpent = INITIAL_TIME - timeLeft;
         let starFile = "stars/1 Star.webp";
 
-        if (timeSpent <= 30) starFile = "stars/3 Stars.webp";
-        else if (timeSpent <= 45) starFile = "stars/2 Stars.webp";
+        if (timeSpent <= 35) starFile = "stars/3 Stars.webp";
+        else if (timeSpent <= 50) starFile = "stars/2 Stars.webp";
         else starFile = "stars/1 Star.webp";
 
         starImg.src = starFile;
