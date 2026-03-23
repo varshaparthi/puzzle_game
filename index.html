@@ -357,6 +357,9 @@
     function handleTileClick(index) {
         if (selectedIndex === null) {
             selectedIndex = index;
+        } else if (selectedIndex === index) {
+            // The user clicked the same tile again - deselect it!
+            selectedIndex = null;
         } else {
             if (isAdjacent(selectedIndex, index)) {
                 [tiles[selectedIndex], tiles[index]] = [tiles[index], tiles[selectedIndex]];
