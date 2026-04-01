@@ -7,13 +7,13 @@
     <style>
         :root {
             /* Responsive Sizing */
-            --phone-height: 100vh; 
+            --phone-height: 92vh; 
             --phone-width: calc(var(--phone-height) * (9 / 16));
             --grid-size: 85%; 
             
             /* Assets */
             --img-url: url('3.webp'); 
-            --panel-url: url('stars/final_panel_1.webp');
+            
             
             /* Theme Colors */
             --wood-light: #d2a679;
@@ -40,7 +40,7 @@
             background-position: center;
             filter: blur(20px);
             z-index: -1;
-            opacity: 0.4;
+            opacity: 0.3;
         }
 
         .mobile-frame {
@@ -48,12 +48,13 @@
             height: var(--phone-height);
             max-width: 450px; 
             max-height: 800px;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             border-radius: 4vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
+            overflow: hidden;
             box-shadow: 0 0 50px rgba(0,0,0,0.8);
             border: 0.8vh solid #333;
         }
@@ -64,7 +65,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 0;
+            margin-top: 3.5vh;
             z-index: 10;
         }
 
@@ -82,18 +83,31 @@
         }
 
         .icon-circle {
-            width: 3.2vh;
-            height: 3.2vh;
-            border-radius: 50%;
-            background: var(--gold);
-            border: 0.2vh solid #b8860b;
+            width: 4.5vh; /* Slightly larger for better visibility */
+            height: 4.5vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 0.8vh;
-            font-size: 1.4vh;
+            margin-right: 0.5vh;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
-
+        .icon-circle img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }.settings-btn {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        /* Specific sizing for the UI bars to accommodate larger icons */
+        .ui-bar {
+            padding: 0.2vh 1.2vh; /* Reduced padding as icons are larger now */
+        }
         /* CENTERED TIMER (Back to original position) */
         #timer {
             margin-top: 2.5vh;
@@ -135,20 +149,25 @@
         /* Win Panel Modal */
         #win-panel {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.9);
             z-index: 100;
             display: none;
-            justify-content: center;
-            align-items: center;
+            justify-content: none;
+            align-items: none;
             border-radius: 3.2vh;
+            overflow: hidden;
         }
 
         .panel-content {
-            width: 80%;
+            width: 100%;
+            height: 100%;
+            background-image: url(stars/congrats.webp);
             aspect-ratio: 3 / 4;
-            background-image: var(--panel-url);
-            background-size: contain;
+            background-size: 100% 100%;
             background-repeat: no-repeat;
             background-position: center;
             display: flex;
@@ -158,26 +177,30 @@
         }
 
         .star-display {
-            margin-top: 48%; 
+            margin-top: 58%; 
             width: 65%;
         }
 
-
-        .restart-btn {
-            margin-top: 15%;
-            padding: 1.5vh 4vh;
-            background: var(--gold);
-            border: none;
-            border-radius: 3vh;
-            font-weight: bold;
-            color: #5d3a1a;
-            cursor: pointer;
-            box-shadow: 0 0.5vh 0 #b8860b;
-            font-size: 1.8vh;
+        .play-button{
+            display: flex;
+            flex-direction: row; /* Align horizontal */
+            justify-content: space-between; /* One left, one right */
+            width: 100%; /* Width of the button area */
+            margin-top: 45%;
         }
-
+        .restart-btn {
+           width: 45%; /* Adjust size so two fit side-by-side */
+           cursor: pointer;
+           transition: transform 0.1s active;
+           object-fit: contain;
+   
+        }
+        .restart-btn:active {
+            transform: scale(0.95); /* Little click effect */
+        }
         .ad-btn { background: #4caf50; color: white; box-shadow: 0 0.6vh 0 #2e7d32; }
-           .fail-text {
+
+        .fail-text {
             color: white;
             font-size: 3vh;
             font-weight: bold;
@@ -242,12 +265,16 @@
 <div class="mobile-frame">
     <div class="ui-container">
         <div class="ui-bar">
-            <div class="icon-circle">🏠</div>
+            <div class="icon-circle">
+                <img src="stars/home f 3.webp" alt="">
+            </div>
             <span id="level-display">Lv. 1</span>
-        
+            
         </div>
-        <div class="ui-bar" style="padding: 0.5vh;">
-            <div class="icon-circle" style="margin:0;">⚙️</div>
+        <div class="settings-btn" style="padding: 0.5vh;">
+            <div class="icon-circle" style="margin:0;">
+                <img src="stars/home f 4.webp" alt="">
+            </div>
         </div>
     </div>
 
@@ -255,17 +282,21 @@
 
     <div class="puzzle-board" id="board"></div>
 
-    <div id="win-panel" class ="win-panel1">
+    <div id="win-panel" class="win-panel1">
         <div class="panel-content">
             <img id="star-img" src="stars/0 Stars.webp" class="star-display">
-            <button class="restart-btn" onclick="location.reload()">PLAY AGAIN</button>
+            <div class="play-button">
+                <img src="stars/play again.webp" alt="" class="restart-btn">
+                <img src="stars/Play next.webp" alt="" class="restart-btn">
+            </div>
+            
         </div>
     </div>
-    <div id="fail-panel">
+   <div id="fail-panel">
     <div class="fail-box">
-        <div class="fail-text">TIME OVER!</div>
+        <div class="fail-text">OUT OF TIME!</div>
         <div class="btn-group">
-            <button class="panel-btn ad-btn" onclick="watchAd()">📺 WATCH AD (+10s)</button>
+            <button class="panel-btn ad-btn" onclick="watchAd()">📺 WATCH AD (+30s)</button>
             <button class="panel-btn" onclick="location.reload()" style="background: #e74c3c; color: white;">🔄 RETRY</button>
         </div>
     </div>
@@ -311,9 +342,11 @@
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
                 showFailPanel();
+                
             }
         }, 1000);
     }
+    
     function showFailPanel() {
          gameActive = false;
          failPanel.style.display = 'flex';
@@ -323,10 +356,11 @@
         // Here you would normally trigger your Ad SDK
         alert("Simulating Ad... Rewards: +10 Seconds!");
         failPanel.style.display = 'none';
-        timeLeft = 10; // Give 30 more seconds
+        timeLeft = 30; // Give 30 more seconds
         gameActive = true;
         startTimer();
     }
+    
 
     function render() {
         board.innerHTML = '';
@@ -394,12 +428,6 @@
         starImg.src = starFile;
         winPanel.style.display = 'flex';
     
-    }
-
-    function increaseLevel() {
-        let lvText = document.getElementById('level-display');
-        let currentLv = parseInt(lvText.innerText.replace('Lv. ', ''));
-        lvText.innerText = `Lv. ${currentLv + 1}`;
     }
 
     render();
