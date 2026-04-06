@@ -12,7 +12,7 @@
             --grid-size: 85%; 
             
             /* Assets */
-            --img-url: url('3.webp'); 
+            --img-url: url('Assets/1.webp'); 
             
             
             /* Theme Colors */
@@ -364,7 +364,7 @@
             <img id="star-img" src="stars/0 Stars.webp" class="star-display">
             <div class="play-button">
                 <img src="stars/play again.webp" onclick="location.reload()" alt="" class="restart-btn">
-                <img src="stars/Play next.webp" alt="" class="restart-btn">
+                <img src="stars/Play next.webp" alt="" class="restart-btn" id="next-btn">
             </div>
             
         </div>
@@ -537,6 +537,13 @@
     document.getElementById("music-btn").src =
         musicOn ? "stars/Volume.webp" : "stars/mute.webp";
     }
+    // Add this line with your other constants at the top
+    const nextBtn = document.getElementById('next-btn');
+
+// Add this event listener anywhere in your script
+    nextBtn.onclick = () => {
+        window.location.href = 'level2.html'; 
+    };
     
 </script>
 
