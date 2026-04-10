@@ -165,7 +165,7 @@
         .panel-content {
             width: 100%;
             height: 100%;
-            background-image: url(stars/congrats.webp);
+            background-image: url(stars/1.webp);
             aspect-ratio: 3 / 4;
             background-size: 100% 100%;
             background-repeat: no-repeat;
@@ -274,8 +274,8 @@
             position: relative;
             width: 75%;
             height: 60%;
-            /* background-image: url("stars/settings final panel.webp"); */
-             background-image: url("stars/settings final panel.webp"); 
+            /* background-image: url("stars/settingspanel.webp"); */
+             background-image: url("stars/settingspanel.webp"); 
 
             background-size: 100% 100%;
             background-repeat: no-repeat;
@@ -325,18 +325,18 @@
     <div class="ui-container">
         <div class="ui-bar">
             <div class="icon-circle">
-                <img src="stars/home f 3.webp" alt="">
+                <img src="stars/home.webp" alt="">
             </div>
             <span id="level-display">Lv. 3</span>
             
         </div>
         <!-- <div class="settings-btn" style="padding: 0.5vh;">
             <div class="icon-circle" style="margin:0;">
-                <img src="stars/home f 4.webp" alt="">
+                <img src="stars/settings.webp" alt="">
             </div> -->
         <div class="settings-btn" onclick="openSettings()" style="padding: 0.5vh;">
             <div class="icon-circle" style="margin:0;">
-                <img src="stars/home f 4.webp" alt="">
+                <img src="stars/settings.webp" alt="">
             </div>
         </div>
         <div id="settings-panel">
@@ -361,10 +361,10 @@
 
     <div id="win-panel" class="win-panel1">
         <div class="panel-content">
-            <img id="star-img" src="stars/0 Stars.webp" class="star-display">
+            <img id="star-img" src="stars/0Stars.webp" class="star-display">
             <div class="play-button">
-                <img src="stars/play again.webp" onclick="location.reload()" alt="" class="restart-btn">
-                <img src="stars/Play next.webp" alt="" class="restart-btn" id="next-btn">
+                <img src="stars/playagain.webp" onclick="location.reload()" alt="" class="restart-btn">
+                <img src="stars/playnext.webp" alt="" class="restart-btn" id="next-btn">
             </div>
             
         </div>
@@ -498,11 +498,11 @@
 
     function showWinPanel() {
         const timeSpent = INITIAL_TIME - timeLeft;
-        let starFile = "stars/1 Stars.webp";
+        let starFile = "stars/1Stars.webp";
 
-        if (timeSpent <= 35) starFile = "stars/3 Stars.webp";
-        else if (timeSpent <= 50) starFile = "stars/2 Stars.webp";
-        else starFile = "stars/1 Stars.webp";
+        if (timeSpent <= 35) starFile = "stars/3Stars.webp";
+        else if (timeSpent <= 50) starFile = "stars/2Stars.webp";
+        else starFile = "stars/1Stars.webp";
 
         starImg.src = starFile;
         winPanel.style.display = 'flex';
@@ -528,7 +528,7 @@
     soundOn = !soundOn;
 
     document.getElementById("sound-btn").src =
-        soundOn ? "stars/Music.webp" : "stars/music cancel.webp";
+        soundOn ? "stars/Music.webp" : "stars/musiccancel.webp";
     }
 
     function toggleMusic() {
