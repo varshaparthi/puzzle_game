@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puzzle Game</title>
+
+<style>
+:root {
+  --phone-height: 92vh;
+  --phone-width: calc(var(--phone-height) * (9 / 16));
+}
+
+/* Full screen background */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  font-family: Arial;
+}
+
+/* Blur background */
+.bg-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("levels_buttons/panel.webp") center/cover no-repeat;
+  /* background: url("levels_buttons/BG (1).webp") center/cover no-repeat; */
+  filter: blur(20px);
+  z-index: -1;
+}
+
+/* Mobile frame */
+.mobile-frame {
+  width: var(--phone-width);
+  height: var(--phone-height);
+  max-width: 450px;
+  max-height: 800px;
+  border-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: url("levels_buttons/BG (1).webp") center/cover no-repeat; */
+  background: url("levels_buttons/panel.webp") center/cover no-repeat;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  border: 6px solid #222;
+}
+
+/* Content */
+.container {
+  width: 90%;
+  text-align: center;
+  margin-top: 30%;
+}
+
+/* .title {
+  color: white;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px black;
+} */
+
+/* Layout */
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+/* Level Buttons */
+.level {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  background: linear-gradient(#ffe08a, #d69c2f);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.4);
+}
+
+.level img {
+  width: 60%;
+  height: 60%;
+}
+
+/* Locked */
+.level.lock {
+  opacity: 0.7;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px;
+  
+}
+
+.arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: gold;
+}
+
+.arrow img {
+  width: 100%;
+}
+
+/* Status */
+/* .status {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #5fd0ff, #1a6cff);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+} */
+ .level-status {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+  margin-left: 130px;
+  /* padding: -5px; */
+  /* border-radius: 40px; */
+ }
+</style>
+</head>
+
+<body>
+
+<div class="bg-blur"></div>
+
+<div class="mobile-frame">
+
+  <div class="container">
+
+    <!-- <h1 class="title">Puzzle Game</h1> -->
+
+    <div class="row">
+      <button class="level active"><img src="levels_buttons/1.webp"></button>
+      <button class="level active"><img src="levels_buttons/2.webp"></button>
+      <button class="level active"><img src="levels_buttons/3.webp"></button>
+      <button class="level active"><img src="levels_buttons/4.webp"></button>
+    </div>
+
+    <div class="row">
+      <button class="level lock"><img src="levels_buttons/9.webp"></button>
+      <button class="level lock"><img src="levels_buttons/9.webp"></button>
+      <button class="level lock"><img src="levels_buttons/9.webp"></button>
+    </div>
+
+    <div class="row">
+      <button class="level lock"><img src="levels_buttons/9.webp"></button>
+      <button class="level lock"><img src="levels_buttons/9.webp"></button>
+    </div>
+
+    <div class="row">
+      <button class="level lock"><img src="levels_buttons/9.webp"></button>
+    </div>
+
+    <div class="nav">
+      <button class="arrow"><img src="levels_buttons/arrow 1.webp"></button>
+      <button class="arrow"><img src="levels_buttons/Arrow 2.webp"></button>
+    </div>
+
+    <!-- <div class="status">Level Completed!</div> -->
+    <div class="level-status">
+      <!-- <button class="status"><img src="levels_buttons/Level Completed.webp"></button> -->
+      <img src="levels_buttons/Level Completed.webp">
+      
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const levels = document.querySelectorAll(".level.active");
+
+levels.forEach((btn, index) => {
+  btn.addEventListener("click", () => {
+    window.location.href = "level" + (index + 1) + ".html";
+  });
+});
+</script>
+
+</body>
+</html>
