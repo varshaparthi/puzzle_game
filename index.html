@@ -137,6 +137,49 @@
         font-size: 0.92rem;
         min-height: 1.3em;
     }
+     .rules-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 10;
+    }
+    .rules-card {
+        width: min(420px, 100%);
+        background: url("homeScreen.webp") center/cover no-repeat;
+        border-radius: 20px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+    }
+    .rules-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+    .rules-content {
+        text-align: left;
+    }
+    .rules-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .rules-list li {
+        margin-bottom: 15px;
+        line-height: 1.4;
+        font-size: 0.95rem;
+    }
+    .rules-list strong {
+        color: #ffd700;
+    }
 </style>
 </head>
 <body>
@@ -155,7 +198,7 @@
     <div class="nav">
         <!-- <button class="arrow"><img src="settings.webp"></button> -->
         <button class="arrow" onclick="toggleShareModal()"><img src="home/share.webp"></button>
-        <button class="arrow"><img src="home/important.webp"></button>
+        <button class="arrow" onclick="toggleRulesModal()"><img src="home/important.webp"></button>
     </div>
     <div id="share-modal" class="share-modal" aria-hidden="true">
     <div class="share-card">
@@ -171,6 +214,21 @@
             <button class="share-btn copy" onclick="copyShareLink()">Copy Link</button>
         </div>
         <p id="share-feedback" class="share-feedback" aria-live="polite"></p>
+    </div>
+</div>
+    <div id="rules-modal" class="rules-modal" aria-hidden="true">
+    <div class="rules-card">
+        <div class="rules-header">
+            <span>Game Rules</span>
+            <button class="close-btn" onclick="toggleRulesModal()">×</button>
+        </div>
+        <div class="rules-content">
+            <ul class="rules-list">
+                <li><strong>Select a tile:</strong> Click a tile once to select it. You can then swap it with adjacent tiles only.</li>
+                <li><strong>Rotate a tile:</strong> Click a tile twice to rotate it.</li>
+                <li><strong>Correct placement:</strong> When a tile is placed in the correct position, it will be highlighted.</li>
+            </ul>
+        </div>
     </div>
 </div>
 </div>
@@ -216,6 +274,12 @@
         } else {
             document.getElementById('share-feedback').textContent = 'Copy the URL manually: ' + shareUrl;
         }
+    }
+     function toggleRulesModal() {
+        const modal = document.getElementById('rules-modal');
+        const hidden = modal.getAttribute('aria-hidden') === 'true';
+        modal.setAttribute('aria-hidden', hidden ? 'false' : 'true');
+        modal.style.display = hidden ? 'flex' : 'none';
     }
 </script>
 </body>
