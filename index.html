@@ -149,8 +149,8 @@
         z-index: 10;
     }
     .rules-card {
-        width: min(420px, 100%);
-        background: url("homeScreen.webp") center/cover no-repeat;
+        width: min(360px, 80%);
+        background-color:#faac1c;
         border-radius: 20px;
         box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         padding: 20px;
@@ -179,7 +179,7 @@
         font-size: 0.95rem;
     }
     .rules-list strong {
-        color: #ffd700;
+        color: #0400ff;
     }
     .settings-modal {
         display: none;
@@ -282,7 +282,8 @@
     <div class="rules-card">
         <div class="rules-header">
             <span>Game Rules</span>
-            <button class="close-btn" onclick="toggleRulesModal()">×</button>
+            <!-- <button class="close-btn" onclick="toggleRulesModal()">×</button> -->
+            <img src="stars/cancel.webp " class="close-btn" onclick="toggleRulesModal()" alt="">
         </div>
         <div class="rules-content">
             <ul class="rules-list">
@@ -310,7 +311,7 @@
             <div class="setting-item">
                 <span class="setting-label">Sound</span>
                 <button class="settings-btn" id="sound-btn" onclick="toggleSound()">
-                    <img id="sound-img" src="stars/volume.webp" alt="Sound">
+                    <img id="sound-img" src="stars/Volume.webp" alt="Sound">
                 </button>
             </div>
         </div>
