@@ -181,6 +181,65 @@
     .rules-list strong {
         color: #ffd700;
     }
+    .settings-modal {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 10;
+    }
+    .settings-card {
+        width: min(360px, 80%);
+        background-color: #fda90c;
+        border-radius: 20px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+    }
+    .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+    .settings-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    .setting-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 250px;
+    }
+    .setting-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #fff;
+    }
+    .settings-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .settings-btn:hover {
+        transform: scale(1.05);
+    }
+    .settings-btn img {
+        width: 25%;
+        max-width: 220px;
+        height: auto;
+    }
 </style>
 </head>
 <body>
@@ -198,6 +257,7 @@
 
     <div class="nav">
         <!-- <button class="arrow"><img src="settings.webp"></button> -->
+        <button class="arrow" onclick="toggleSettingsModal()"><img src="stars/setting.webp"></button>
         <button class="arrow" onclick="toggleShareModal()"><img src="home/share.webp"></button>
         <button class="arrow" onclick="toggleRulesModal()"><img src="home/important.webp"></button>
     </div>
@@ -233,6 +293,29 @@
         </div>
     </div>
 </div>
+  <div id="settings-modal" class="settings-modal" aria-hidden="true">
+    <div class="settings-card">
+        <div class="settings-header">
+            <span>Settings</span>
+            <!-- <button class="close-btn" onclick="toggleSettingsModal()">×</button> -->
+             <img src="stars/cancel.webp " class="close-btn" onclick="toggleSettingsModal()" alt="">
+        </div>
+        <div class="settings-buttons">
+            <div class="setting-item">
+                <span class="setting-label">Music</span>
+                <button class="settings-btn" id="music-btn" onclick="toggleMusic()">
+                    <img id="music-img" src="stars/Music.webp" alt="Music">
+                </button>
+            </div>
+            <div class="setting-item">
+                <span class="setting-label">Sound</span>
+                <button class="settings-btn" id="sound-btn" onclick="toggleSound()">
+                    <img id="sound-img" src="stars/volume.webp" alt="Sound">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>  
 </div>
 <script>
      const shareUrl = window.location.href;
@@ -282,6 +365,31 @@
         const hidden = modal.getAttribute('aria-hidden') === 'true';
         modal.setAttribute('aria-hidden', hidden ? 'false' : 'true');
         modal.style.display = hidden ? 'flex' : 'none';
+    }
+     let isMusicOn = true;
+    let isSoundOn = true;
+
+    function toggleSettingsModal() {
+        const modal = document.getElementById('settings-modal');
+        const hidden = modal.getAttribute('aria-hidden') === 'true';
+        modal.setAttribute('aria-hidden', hidden ? 'false' : 'true');
+        modal.style.display = hidden ? 'flex' : 'none';
+    }
+
+    function toggleMusic() {
+        isMusicOn = !isMusicOn;
+        const musicImg = document.getElementById('music-img');
+        musicImg.src = isMusicOn ? 'stars/Music.webp' : 'stars/musiccancel.webp';
+        musicImg.alt = isMusicOn ? 'stars/volume.webp' : 'stars/mute.webp';
+        console.log('Music:', isMusicOn ? 'On' : 'Off');
+    }
+
+    function toggleSound() {
+        isSoundOn = !isSoundOn;
+        const soundImg = document.getElementById('sound-img');
+        soundImg.src = isSoundOn ? 'stars/volume.webp' : 'stars/mute.webp';
+        soundImg.alt = isSoundOn ? 'stars/volume.webp' : 'stars/mute.webp';
+        console.log('Sound:', isSoundOn ? 'On' : 'Off');
     }
 </script>
 </body>
